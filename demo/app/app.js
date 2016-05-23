@@ -1,11 +1,11 @@
 // * events: ['liked']
-// * vm.liked = new ng.core.EventEmitter();
-// * vm.liked.next();
+// * this.liked = new ng.core.EventEmitter();
+// * this.liked.next();
 
 var LikeButtonComponent = ng.core
   .Component({
     selector: "like",
-    events: ["liked"],
+    events: ['liked'],
     template:
     `
       <a (click)="handleClick()">
@@ -15,8 +15,14 @@ var LikeButtonComponent = ng.core
   })
   .Class({
     constructor: function() {
+      this.liked = new ng.core.EventEmitter();
+      this.status = false;
       this.handleClick = function() {
-        console.log('clicked');
+        this.status = !this.status;
+        this.liked.emit({
+          status: this.status
+        });
+        console.log('clicked', this.status);
       }
     }
   })
@@ -27,14 +33,14 @@ var AppComponent = ng.core
     directives: [LikeButtonComponent],
     template:
     `
-      <like on-liked="handleLike()"></like>
-      {{message}}
+      <like (liked)="handleClick($event)"></like>
+      <div>{{message | json}}</div>
     `
   })
   .Class({
     constructor: function() {
-      this.handleLike = function() {
-        this.message = "Thanks for liking us"
+      this.handleClick = function(evt) {
+        this.message = evt;
       }
     }
   })
@@ -43,11 +49,48 @@ document.addEventListener('DOMContentLoaded', function() {
   ng.platform.browser.bootstrap(AppComponent, [])
 });
 
+// Initial State
+// var LikeButtonComponent = ng.core
+//   .Component({
+//     selector: "like",
+//     template:
+//     `
+//       <a>
+//         Like?
+//       </a>
+//     `
+//   })
+//   .Class({
+//     constructor: function() {
+//       this.handleClick = function() {
+//         console.log('clicked');
+//       }
+//     }
+//   })
+
+// var AppComponent = ng.core
+//   .Component({
+//     selector: "app",
+//     directives: [LikeButtonComponent],
+//     template:
+//     `
+//       <like></like>
+//       {{message}}
+//     `
+//   })
+//   .Class({
+//     constructor: function() {}
+//   })
+
+// document.addEventListener('DOMContentLoaded', function() {
+//   ng.platform.browser.bootstrap(AppComponent, [])
+// });
 
 
 
 
-//Goal State
+
+// Goal State
 // var LikeButtonComponent = ng.core
 //   .Component({
 //     selector: "like",
