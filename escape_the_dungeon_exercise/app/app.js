@@ -40,12 +40,27 @@ var ProtagonistComponent = ng.core
     `
 
       <h1>{{hero.name}}</h1>
-      <p>{{hero.x}}, {{hero.y}}</p>
+      <pre>{{hero | json}}</pre>
     `
   })
   .Class({
     constructor: function() {
-      this.hero = heroModel;
+    }
+  });
+
+var LocationComponent = ng.core
+  .Component({
+    selector: "location",
+    inputs: ['location'],
+    template:
+    `
+
+      <h2>Location</h2>
+      <pre>{{location | json}}</pre>
+    `
+  })
+  .Class({
+    constructor: function() {
     }
   });
 
@@ -57,7 +72,7 @@ var InventoryComponent = ng.core
     `
       <h2>Inventory</h2>
       <li *ngFor="let item of inventory.items">
-        {{item | json}}
+        <pre>{{item | json}}</pre>
       </li>
     `
   })
@@ -73,10 +88,11 @@ var AppComponent = ng.core
     `
     <protagonist [hero]="hero"></protagonist>
     <inventory [inventory]="inventory"></inventory>
+    <location [location]="location"></location>
     <button *ngIf="location.exits.north" (click)="hero.moveNorth()">North</button>
-    <button *ngIf="location.exits.south" (click)="hero.moveSouth()">south</button>
-    <button *ngIf="location.exits.east" (click)="hero.moveEast()">east</button>
-    <button *ngIf="location.exits.west" (click)="hero.moveWest()">west</button>
+    <button *ngIf="location.exits.south" (click)="hero.moveSouth()">South</button>
+    <button *ngIf="location.exits.east" (click)="hero.moveEast()">East</button>
+    <button *ngIf="location.exits.west" (click)="hero.moveWest()">West</button>
     `
   })
   .Class({
@@ -93,7 +109,7 @@ var AppComponent = ng.core
 var AppModule =
   ng.core.NgModule({
     imports: [ ng.platformBrowser.BrowserModule ],
-    declarations: [ AppComponent, ProtagonistComponent, InventoryComponent ],
+    declarations: [ AppComponent, ProtagonistComponent, InventoryComponent, LocationComponent ],
     bootstrap: [ AppComponent ]
   })
   .Class({
