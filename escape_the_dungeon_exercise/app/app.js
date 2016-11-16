@@ -17,10 +17,24 @@ var heroModel = {
   }
 }
 
-var locationModel = {
+var LocationModel = {
   name: "Nondescript Corridor",
   description: "It is very dark. To the north you can just make out a faint glimmer of golden light.",
-  exits: {north: true, east: true}
+  exits: "North",
+  items: [
+    {
+      name: "rusty_sword",
+      type: "weapon",
+      damage: 1,
+      description: "A Rusty old Sword, knocked and well used"
+    },
+    {
+      name: "cheese",
+      type: "food",
+      health: 0.5,
+      description: "A Piece of Mouldy Cheese"
+    }
+  ]
 }
 
 var inventoryModel = {
