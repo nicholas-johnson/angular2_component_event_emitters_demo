@@ -26,13 +26,13 @@ var LocationModel = {
   },
   items: [
     {
-      name: "rusty_sword",
+      name: "Rusty Sword",
       type: "weapon",
       damage: 1,
       description: "A Rusty old Sword, knocked and well used"
     },
     {
-      name: "cheese",
+      name: "Cheese",
       type: "food",
       health: 0.5,
       description: "A Piece of Mouldy Cheese"
@@ -44,9 +44,7 @@ var inventoryModel = {
   addItem: function(item) {
     this.items.push(item)
   },
-  items: [
-    {name: "Rusty Sword"}
-  ]
+  items: []
 }
 
 var ProtagonistComponent = ng.core
@@ -102,7 +100,7 @@ var InventoryComponent = ng.core
     `
       <h2>Inventory</h2>
       <li *ngFor="let item of inventory.items">
-        <pre>{{item | json}}</pre>
+        {{item.name}}
       </li>
     `
   })
