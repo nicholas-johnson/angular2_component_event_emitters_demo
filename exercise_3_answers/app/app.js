@@ -3,7 +3,7 @@ var UserDisplayComponent = ng.core
   .Component({
     selector: "user",
     inputs: ['profile'],
-    events: ['selected'],
+    outputs: ['selected'],
     template:
     `
       <div>
@@ -14,13 +14,12 @@ var UserDisplayComponent = ng.core
   })
   .Class({
     constructor: function() {
-      var vm = this;
-      vm.selected = new ng.core.EventEmitter();
-      vm.selectUser = function() {
-        vm.selected.emit(vm.profile);
+      this.selected = new ng.core.EventEmitter();
+      this.selectUser = () => {
+        this.selected.emit(this.profile);
       }
     }
-  })
+  });
 
 var AppComponent = ng.core
   .Component({
@@ -28,20 +27,26 @@ var AppComponent = ng.core
     directives: [UserDisplayComponent],
     template:
     `
-      <user bind-profile="{name:'tom'}" on-selected="setSelectedUser($event)"></user>
-      <user [profile]="{name:'dick'}" (selected)="setSelectedUser($event)"></user>
-      <user [profile]="{name:'marigold'}" on-selected="setSelectedUser($event)"></user>
+      <h2>Users</h2>
+      <div *ngFor="let user of users">
+        <user [profile]="user" (selected)="setSelectedUser($event)"></user>
+      </div>
 
-      <h1>Selected User</h1>
+
+      <h2>Selected User</h2>
       <user [profile]="selectedUser"></user>
     `
   })
   .Class({
     constructor: function() {
-      var vm = this;
-      vm.selectedUser = {}
-      vm.setSelectedUser = function(user) {
-        vm.selectedUser = user;
+      this.users = [
+        {name: "Tom"},
+        {name: "Mikey"},
+        {name: "Howard"},
+      ]
+      this.selectedUser = {}
+      this.setSelectedUser = (user) => {
+        this.selectedUser = user;
       }
     }
   })
@@ -49,11 +54,12 @@ var AppComponent = ng.core
 var AppModule =
   ng.core.NgModule({
     imports: [ ng.platformBrowser.BrowserModule ],
-    declarations: [ AppComponent ],
+    declarations: [ AppComponent, UserDisplayComponent ],
     bootstrap: [ AppComponent ]
   })
   .Class({
-    constructor: function() {}
+    constructor: function() {
+    }
   });
 
 
