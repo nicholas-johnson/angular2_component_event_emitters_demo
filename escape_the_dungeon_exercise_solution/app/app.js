@@ -71,9 +71,9 @@ var LocationComponent = ng.core
     template:
     `
 
-      <h2>Location</h2>
-      <pre>{{location | json}}</pre>
-      <h2>Items at this location</h2>
+      <h2>You are in: {{location.name}}</h2>
+      <p>{{location.description}}</p>
+      <h3>Items at this location</h3>
       <ul>
         <li *ngFor="let item of location.items">
           {{item.name}}
@@ -114,13 +114,26 @@ var AppComponent = ng.core
     selector: "app",
     template:
     `
-    <protagonist [hero]="hero"></protagonist>
-    <inventory [inventory]="inventory"></inventory>
-    <location [location]="location" (pickUpItem)="handlePickUpItem($event)"></location>
-    <button *ngIf="location.exits.north" (click)="hero.moveNorth()">North</button>
-    <button *ngIf="location.exits.south" (click)="hero.moveSouth()">South</button>
-    <button *ngIf="location.exits.east" (click)="hero.moveEast()">East</button>
-    <button *ngIf="location.exits.west" (click)="hero.moveWest()">West</button>
+    <div class="row">
+      <div >
+        <protagonist [hero]="hero"></protagonist>
+      </div>
+    </div>
+    <div class="row">
+      <div >
+        <inventory [inventory]="inventory"></inventory>
+      </div>
+    </div>
+    <div class="row">
+      <location [location]="location" (pickUpItem)="handlePickUpItem($event)"></location>
+    </div>
+    <div class="row">
+      <button *ngIf="location.exits.north" (click)="hero.moveNorth()">North</button>
+      <button *ngIf="location.exits.south" (click)="hero.moveSouth()">South</button>
+      <button *ngIf="location.exits.east" (click)="hero.moveEast()">East</button>
+      <button *ngIf="location.exits.west" (click)="hero.moveWest()">West</button>
+    </div>
+
     `
   })
   .Class({
