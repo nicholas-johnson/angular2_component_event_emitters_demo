@@ -30,7 +30,6 @@ var LikeButtonComponent = ng.core
 var AppComponent = ng.core
   .Component({
     selector: "app",
-    directives: [LikeButtonComponent],
     template:
     `
       <like (liked)="handleClick($event)"></like>
@@ -45,9 +44,23 @@ var AppComponent = ng.core
     }
   })
 
-document.addEventListener('DOMContentLoaded', function() {
-  ng.platform.browser.bootstrap(AppComponent, [])
-});
+var AppModule =
+  ng.core.NgModule({
+    imports: [ ng.platformBrowser.BrowserModule ],
+    declarations: [ AppComponent, LikeButtonComponent ],
+    bootstrap: [ AppComponent ]
+  })
+  .Class({
+    constructor: function() {}
+  });
+
+
+// Finally bootstrap
+ng.platformBrowserDynamic
+  .platformBrowserDynamic()
+  .bootstrapModule(AppModule);
+
+
 
 // Initial State
 // var LikeButtonComponent = ng.core
