@@ -24,7 +24,7 @@ var locationModel = {
 }
 
 var inventoryModel = {
-  addItem: (item) => {
+  addItem: function(item) {
     this.items.push(item)
   },
   items: [
