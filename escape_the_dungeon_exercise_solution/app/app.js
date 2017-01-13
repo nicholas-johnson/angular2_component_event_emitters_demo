@@ -1,26 +1,27 @@
-
 var heroModel = {
   name: "LLars Bunderchump",
   x: 0,
   y: 0,
   moveNorth: function() {
-    this.x++;
+    this.y++;
   },
   moveSouth: function() {
-    this.x--;
+    this.y--;
   },
   moveEast: function() {
-    this.y--
+    this.x--
   },
   moveWest: function() {
-    this.y++
+    this.x++
   }
 }
 
 var LocationModel = {
   name: "Nondescript Corridor",
   description: "It is very dark. To the north you can just make out a faint glimmer of golden light.",
-  exits: "North",
+  exits: {
+    north:true
+  },
   removeItem: function(item) {
     this.items.splice(this.items.indexOf(item), 1)
   },

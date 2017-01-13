@@ -4,23 +4,23 @@ var heroModel = {
   x: 0,
   y: 0,
   moveNorth: function() {
-    this.x++;
+    this.y++;
   },
   moveSouth: function() {
-    this.x--;
+    this.y--;
   },
   moveEast: function() {
-    this.y--
+    this.x--
   },
   moveWest: function() {
-    this.y++
+    this.x++
   }
 }
 
 var locationModel = {
   name: "Nondescript Corridor",
   description: "It is very dark. To the north you can just make out a faint glimmer of golden light.",
-  exits: "North",
+  exits: {north:true},
   items: [
     {
       name: "rusty_sword",
