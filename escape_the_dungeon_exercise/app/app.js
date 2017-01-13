@@ -17,7 +17,7 @@ var heroModel = {
   }
 }
 
-var LocationModel = {
+var locationModel = {
   name: "Nondescript Corridor",
   description: "It is very dark. To the north you can just make out a faint glimmer of golden light.",
   exits: "North",

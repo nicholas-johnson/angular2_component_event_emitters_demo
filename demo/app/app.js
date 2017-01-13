@@ -32,13 +32,13 @@ var AppComponent = ng.core
     selector: "app",
     template:
     `
-      <like (liked)="handleClick($event)"></like>
+      <like (liked)="handleLike($event)"></like>
       <div>{{message | json}}</div>
     `
   })
   .Class({
     constructor: function() {
-      this.handleClick = function(evt) {
+      this.handleLike = function(evt) {
         this.message = evt;
       }
     }
