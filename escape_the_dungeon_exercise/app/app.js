@@ -72,6 +72,11 @@ var LocationComponent = ng.core
 
       <h2>Location</h2>
       <pre>{{location | json}}</pre>
+      <ul>
+        <li *ngFor="let item of location.items">
+          <pre>{{item | json}}</pre>
+        </li>
+      </ul>
     `
   })
   .Class({
@@ -86,9 +91,11 @@ var InventoryComponent = ng.core
     template:
     `
       <h2>Inventory</h2>
-      <li *ngFor="let item of inventory.items">
-        <pre>{{item | json}}</pre>
-      </li>
+      <ul>
+        <li *ngFor="let item of inventory.items">
+          <pre>{{item | json}}</pre>
+        </li>
+      </ul>
     `
   })
   .Class({

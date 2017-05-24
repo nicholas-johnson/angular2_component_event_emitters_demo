@@ -71,7 +71,6 @@ var LocationComponent = ng.core
     outputs: ['pickUpItem'],
     template:
     `
-
       <h2>You are in: {{location.name}}</h2>
       <p>{{location.description}}</p>
       <h3>Items at this location</h3>
